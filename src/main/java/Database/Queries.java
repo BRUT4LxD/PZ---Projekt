@@ -1,6 +1,6 @@
 package Database;
 
-import Exceptions.PlayerAlreadyExists;
+import Exceptions.PlayerAlreadyExistsException;
 import Exceptions.PlayerNotFound;
 import Misc.Utils;
 
@@ -35,7 +35,7 @@ public final class Queries {
 
 
     }
-    public static boolean checkRegistration(String name) throws PlayerAlreadyExists {
+    public static boolean checkRegistration(String name) throws PlayerAlreadyExistsException {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         try{
@@ -46,7 +46,7 @@ public final class Queries {
 
             System.out.println("Gracz juz istnieje!");
             em.close();
-            throw new PlayerAlreadyExists();
+            throw new PlayerAlreadyExistsException();
 
         }catch (NoResultException e){
             System.out.println(" No results");

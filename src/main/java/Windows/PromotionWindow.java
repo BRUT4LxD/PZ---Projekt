@@ -32,6 +32,7 @@ public class PromotionWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         initImages();
+        checkLanguage();
         setVisible(true);
     }
 
@@ -156,4 +157,19 @@ public class PromotionWindow extends JFrame {
 
     }
 
+    public void checkLanguage(){
+
+        switch (Utils.language){
+            case English:
+                this.setTitle("CHESS");
+                break;
+
+            case Polski:
+
+                this.setTitle("SZACHY");
+                break;
+
+        }
+
+    }
 }

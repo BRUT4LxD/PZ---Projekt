@@ -1,8 +1,7 @@
 package Windows;
 
 import Database.Queries;
-import Exceptions.PlayerAlreadyExists;
-import Misc.Language;
+import Exceptions.PlayerAlreadyExistsException;
 import Misc.Utils;
 
 import javax.swing.*;
@@ -11,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static Appearance.Gui.setSkin;
-import static Misc.Language.*;
 
 public class RegistrationWindow extends JFrame {
 
@@ -85,7 +83,7 @@ public class RegistrationWindow extends JFrame {
                         new LogInWindow();
                         closeWindow();
                     }
-                } catch (PlayerAlreadyExists playerAlreadyExists) {
+                } catch (PlayerAlreadyExistsException playerAlreadyExists) {
                 }
             }
         });

@@ -1,5 +1,6 @@
 import Appearance.SkinTypes;
 import Database.Queries;
+import Misc.Language;
 import Misc.Logger;
 import Misc.Utils;
 import Pieces.PlayerColor;
@@ -16,7 +17,7 @@ public class Init {
     Init(){
         getPropeties();
         setLogger();
-        //setDatabase();
+        setDatabase();
     }
     private void getPropeties() {
         try{
@@ -35,6 +36,7 @@ public class Init {
     }
     private void setUtilsFromProperties(Properties p ){
         setTheme(p.getProperty("Theme"));
+        setLanguage(p.getProperty("Language"));
         //setPlayerColor(p.getProperty("PlayerColor"));
     }
     private void setTheme(String theme){
@@ -54,6 +56,14 @@ public class Init {
             Utils.skin = SkinTypes.windows;
         }
 
+    }
+    private void setLanguage(String language){
+        if(language.equals("english")){
+            Utils.language = Language.English;
+        }
+        if(language.equals("polish")){
+            Utils.language = Language.Polski;
+        }
     }
     private void setPlayerColor(String playerColor1){
         if(playerColor1.equals("black")) Utils.playerColor = PlayerColor.Black;

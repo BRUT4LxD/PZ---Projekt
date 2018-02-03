@@ -42,7 +42,7 @@ public class Table {
 
         initPieces();
         this.gameTable.add(boardTemplate);
-        setButtons();
+        //setButtons();
         this.gameTable.repaint();
 
 

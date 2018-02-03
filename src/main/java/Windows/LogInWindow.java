@@ -5,7 +5,6 @@ import Appearance.SkinTypes;
 import Database.Queries;
 import Exceptions.PlayerNotFound;
 import GameTable.Table;
-import Misc.Language;
 import Misc.Utils;
 
 import javax.swing.*;
@@ -56,6 +55,7 @@ public class LogInWindow extends JFrame {
         setLogIn(gc);
         setSkinsSettings(gc);
         setLanguageSettings(gc);
+        checkLanguage();
 
         this.setVisible(true);
 
@@ -104,14 +104,12 @@ public class LogInWindow extends JFrame {
 
         logInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                /*try {
+                try {
                     Utils.player = Queries.checkLogIn(nickText.getText(), passwordText.getText());
                     closeWindow();
                     new StartWindow();
                 } catch (PlayerNotFound playerNotFound) {
-                }*/
-                closeWindow();
-                new Table();
+                }
 
             }
         });
@@ -133,14 +131,14 @@ public class LogInWindow extends JFrame {
         polButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Utils.language = Polski;
-                setLanguage();
+                checkLanguage();
                 repaint();
             }
         });
         engButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Utils.language = English;
-                setLanguage();
+                checkLanguage();
                 repaint();
             }
         });
@@ -161,7 +159,7 @@ public class LogInWindow extends JFrame {
 
 
     }
-    public void setLanguage(){
+    public void checkLanguage(){
 
         switch (Utils.language){
             case English:
