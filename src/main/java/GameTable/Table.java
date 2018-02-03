@@ -257,7 +257,7 @@ public class Table {
         }
 
     }
-    public void addPiece(Piece piece, int i){
+    public void addPiece(Piece piece){
 
 
         JLabel j = piece.getImage();

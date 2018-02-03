@@ -1,23 +1,29 @@
+package Init;
+
 import Appearance.SkinTypes;
-import Database.Queries;
 import Misc.Language;
 import Misc.Logger;
 import Misc.Utils;
+import Pieces.PieceType;
 import Pieces.PlayerColor;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import javax.persistence.Persistence;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 public class Init {
 
-    Init(){
+    public Init(){
         getPropeties();
         setLogger();
         setDatabase();
+        initXML();
     }
     private void getPropeties() {
         try{
@@ -76,5 +82,44 @@ public class Init {
     private void setLogger(){
         Logger logger = Logger.getInstance();
         logger.setLogger();
+    }
+
+    private void initXML(){
+
+        try {
+
+            File fXmlFile = new File("pieces.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+            //optional, but recommended
+            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("Piece");
+
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                Node nNode = nList.item(temp);
+
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+                    PieceType.King.setLongName(eElement.getElementsByTagName("King").item(0).getTextContent());
+                    PieceType.Queen.setLongName(eElement.getElementsByTagName("Queen").item(0).getTextContent());
+                    PieceType.Knight.setLongName(eElement.getElementsByTagName("Knight").item(0).getTextContent());
+                    PieceType.Rook.setLongName(eElement.getElementsByTagName("Rook").item(0).getTextContent());
+                    PieceType.Pawn.setLongName(eElement.getElementsByTagName("Pawn").item(0).getTextContent());
+                    PieceType.Bishop.setLongName(eElement.getElementsByTagName("Bishop").item(0).getTextContent());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,3 +1,4 @@
+import Init.Init;
 
 public class Main {
 

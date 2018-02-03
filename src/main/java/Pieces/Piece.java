@@ -576,13 +576,19 @@ public abstract class Piece extends Field implements Move {
                 if( table.blackPieces.get(i).position.x == thisPiece.position.x &&
                         table.blackPieces.get(i).position.y == thisPiece.position.y){
                     Piece newPiece = createPiece(Utils.promotedPieceType);
-                    newPiece.image.setSize(Utils.TILE_WIDTH,Utils.TILE_WIDTH);
-                    newPiece.image.setLocation((int)position.x*Utils.TILE_WIDTH,(int)position.x*Utils.TILE_WIDTH);
-                    newPiece.image.setVisible(true);
+                    //newPiece.image.setSize(Utils.TILE_WIDTH,Utils.TILE_WIDTH);
+                    //newPiece.image.setLocation((int)position.x*Utils.TILE_WIDTH,(int)position.x*Utils.TILE_WIDTH);
 
-                    table.blackPieces.get(i).image.setIcon(newPiece.image.getIcon());
-                    table.blackPieces.get(i).image.setVisible(true);
-                    table.blackPieces.set(i, newPiece);
+                    //table.blackPieces.get(i).image.setIcon(newPiece.image.getIcon());
+
+                    table.blackPieces.get(i).image.setVisible(false);
+                    table.blackPieces.get(i).taken = true;
+                    table.blackPieces.remove(i);
+                    //table.blackPieces.add(newPiece);
+
+                    table.addPiece(newPiece);
+                    newPiece.image.setVisible(true);
+                    //table.gameTable.add(table.blackPieces.get(table.blackPieces.size() - 1));
                     //table.addPiece(newPiece, i);
                     //table.blackPieces.get(table.blackPieces.size() - 1).image.setIcon(newPiece.image.getIcon());
                     //table.blackPieces.get(table.blackPieces.size() - 1).image.setVisible(true);
@@ -596,9 +602,16 @@ public abstract class Piece extends Field implements Move {
                 if( table.whitePieces.get(i).position.x == thisPiece.position.x &&
                         table.whitePieces.get(i).position.y == thisPiece.position.y){
                     Piece newPiece = createPiece(Utils.promotedPieceType);
-                    table.whitePieces.get(i).image.setIcon(newPiece.image.getIcon());
-                    table.blackPieces.set(i,newPiece);
-                    table.gameTable.repaint();
+                    newPiece.image.setSize(Utils.TILE_WIDTH,Utils.TILE_WIDTH);
+                    newPiece.image.setLocation((int)position.x*Utils.TILE_WIDTH,(int)position.x*Utils.TILE_WIDTH);
+                    newPiece.image.setVisible(true);
+
+                    //table.blackPieces.get(i).image.setIcon(newPiece.image.getIcon());
+                    table.addPiece(newPiece);
+                    table.whitePieces.get(i).image.setVisible(false);
+                    table.whitePieces.get(i).taken = true;
+                    table.whitePieces.add(newPiece);
+                    table.gameTable.add(table.whitePieces.get(table.whitePieces.size() - 1));
                 }
             }
         }
