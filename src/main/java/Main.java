@@ -6,6 +6,7 @@ public class Main {
         new Init();
         //Queries.printDatabase();
         new Windows.LogInWindow();
+        System.out.println("This is a new line of code");
         //new Table();
 
     }
